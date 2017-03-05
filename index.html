@@ -1,0 +1,55 @@
+<html>
+    <head><title>hi world</title></head>
+<body>
+<h1>A small Z-code program</h1>
+
+This Z-machine program is 64 bytes long - exactly the size of the Z-machine header - and prints "hi world". It also happens to be a Befunge-93 program that does the same thing. <p>
+
+To create it, I mostly used the information available in the <a href="http://www.gnelson.demon.co.uk/zspec/">Z-machine Standards Document</a>, particularly the <a href="http://www.gnelson.demon.co.uk/zspec/sect11.html">section about the header</a>. As it turns out, there's plenty of mostly free space inside the header. There's the space where Inform puts the release number, and there's the space where it puts the version of itself, and then some.
+
+There's also lots of space which, while not exactly free, is filled in by the interpreter when the game starts. Its original contents is, therefore, completely inaccessible and irrelevant to the z-machine (well, for the most part); but it's just perfect to place a Befunge program in. <p>
+
+Here's the contents of the file, nicely formatted and in hexadecimal: <p>
+<code>
+    
+0000000 <font color=#FF0000>05</font> <font color=#0000FF>5e</font> <font color=#0000FF>0a</font> <font color=#000000>ff</font>
+<font color=#FF0000>00</font> <font color=#FF0000>40</font> <font color=#FF0000>00</font> <font color=#FF0000>12</font> <font color=#FF0000>00</font> <font color=#FF0000>00</font>
+<font color=#FF0000>00</font> <font color=#FF0000>00</font> <font color=#FF0000>00</font> <font color=#FF0000>00</font> <font color=#FF0000>00</font> <font color=#FF0000>40</font>    .^...@.........@<br>
+0000010 <font color=#FF0000>00</font> <font color=#000000>2a</font> <font color=#00CC00>b2</font> <font color=#00CC00>b5</font>
+<font color=#00CC00>c0</font> <font color=#00CC00>8c</font> <font color=#00CC00>00</font> <font color=#00CC00>22</font> <font color=#FF0000>00</font> <font color=#FF0000>00</font>
+<font color=#FF0000>00</font> <font color=#FF0000>10</font> <font color=#0000FF>0a</font> <font color=#0000FF>3e</font> <font color=#0000FF>35</font> <font color=#0000FF>35</font>    **.....".....&gt;55<br>
+0000020 <font color=#0000FF>2b</font> <font color=#0000FF>22</font> <font color=#0000FF>64</font> <font color=#0000FF>6c</font>
+<font color=#0000FF>72</font> <font color=#0000FF>6f</font> <font color=#0000FF>77</font> <font color=#0000FF>20</font> <font color=#0000FF>69</font> <font color=#0000FF>68</font>
+<font color=#0000FF>22</font> <font color=#0000FF>3e</font> <font color=#0000FF>3a</font> <font color=#0000FF>23</font> <font color=#0000FF>2c</font> <font color=#0000FF>5f</font>    +"dlrow ih"&gt;:#,_<br>
+0000030 <font color=#0000FF>40</font> <font color=#0000FF>0a</font> <font color=#0000FF>5e</font> <font color=#0000FF>3c</font>
+<font color=#FF0000>00</font> <font color=#FF0000>00</font> <font color=#FF0000>00</font> <font color=#FF0000>00</font> <font color=#00CC00>b2</font> <font color=#00CC00>72</font>
+<font color=#00CC00>97</font> <font color=#00CC00>45</font> <font color=#00CC00>25</font> <font color=#00CC00>9c</font> <font color=#00CC00>a5</font> <font color=#00CC00>ba</font>    @.^&lt;.....r.E%...<br>
+<p>
+</code>
+
+    <font color=#FF0000>RED</font> shows the parts of the header that are, as far as I can see, absolutely necessary for the operation of the Z-machine.<BR>
+    <font color=#00CC00>GREEN</font> shows the actual zcode instructions that print "hi world" with a newline and terminate the machine.<BR>
+    <font color=#0000FF>BLUE</font> is the Befunge program - its contents is more clearly seen in ASCII.<p>
+
+    The two black bytes appear to be unused, but i couldn't find any use for them.<p>
+
+    This is how the file looks to a Befunge interpreter, that ignores the non-printable characters and pays attention to the newlines:
+
+<font color=#00CC00>
+<pre>
+     ^
+      @         @       "    
+    &gt;55 +"dlrow ih"&gt;:#,_@
+    ^&lt;        %   
+</pre>
+</font>
+
+(Some of the characters in the second and fourth lines are not actually parts of the program, but bytes used for other purposes that happen to be Befunge instructions. The execution never reaches them). <p>
+
+<hr>
+
+While this program doesn't fully adhere to the Z-machine standard, some standard-compliant interpreters can run it without problems (tested on Frotz, WinFrotz), although WinNitfol is rumored to crash, and ztools don't like it. On the Befunge side, everything should be perfect as long as the Befunge interpreter understands Unix newlines.<p>
+
+<i>Written mostly in hexedit and vim.</i>
+
+</body></html>
